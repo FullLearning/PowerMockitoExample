@@ -1,5 +1,11 @@
 # PowerMockitoExample
 
+## Goal
+
+The goal of PowerMockito is to partially mock an object so that we can override private methods in methods we want to test, which contain private methods.
+
+## Details
+
 This is a very short example project, based on [Intro to PowerMock by Baeldung](http://www.baeldung.com/intro-to-powermock).
 
 Here, we try the example ourselves in order to verify that it is indeed possible to mock a private method!
