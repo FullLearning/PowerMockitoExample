@@ -21,5 +21,10 @@ Many of you coming from the background of Google Plugin for Eclipse are used to 
 
 For example, the package for [AppTest](https://github.com/FullLearning/PowerMockitoExample/blob/master/src/test/java/com/full/mockito/AppTest.java) is the same as the package for the production code it's testing.  See AppTest to view the unit tests as well as how the mock was created and tested.  
 
-In this code, you'll see that the mock is only partially mocked. Only the private method is mocked so that, when we unit test the public method, it doesn't make calls to resources we don't want to be called. Instead, we test the _logic_ not resources the app depends on, like databases, web services, API calls, or File I/O reads. A general rule is that unit tests _never_ make calls to these resources. Instead, they rely on mocks.
+In this code, you'll see that the mock is only partially mocked. Only the private method is mocked so that, when we unit test the public method, it doesn't make calls to resources we don't want to be called. 
+
+![Example of how to mock a private method using the static method "when"](https://github.com/FullLearning/PowerMockitoExample/blob/master/docs/OverridePrivateUsingWhen.png "Example of how to mock a private method using the static method \"when\"")
+
+
+Instead, we test the _logic_ not resources the app depends on, like databases, web services, API calls, or File I/O reads. A general rule is that unit tests _never_ make calls to these resources. Instead, they rely on mocks.
 
