@@ -2,7 +2,7 @@
 
 ## Goal
 
-The goal of PowerMockito is to partially mock an object so that we can override private methods in methods we want to test, which contain private methods.
+The goal of PowerMock is to partially mock an object so that we can override private methods in methods we want to test, which contain private methods.
 
 ## Details
 
