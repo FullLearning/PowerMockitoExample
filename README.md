@@ -8,7 +8,7 @@ While it is impossible to extend or override a private method, there is a workar
 
 ## Class/Package structure
 
-Many of you coming from the background of Google Plugin for Eclipse are used to seeing a different project structure than what just about every other build tool uses, including Gradle, Maven, and Cloud Tools for Eclipse plugin.  The structure is as follows:
+Many of you coming from the background of Google Plugin for Eclipse are used to seeing a different project structure than what just about every other build tool uses, including Gradle, Maven, and Cloud Tools for Eclipse plugin. The structure is as follows:
 
 **- src/main/java:**  This contains production code.  You will find a class called [CollaboratorForPartialMocking](https://github.com/FullLearning/PowerMockitoExample/blob/master/src/main/java/com/full/mockito/CollaboratorForPartialMocking.java), which contains some simple methods that return strings.  Two of the methods return a concatenation of a call to private methods.
 
