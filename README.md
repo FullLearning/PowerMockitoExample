@@ -1,5 +1,11 @@
 # PowerMockitoExample
 
+## Goal
+
+The goal of PowerMock is to partially mock an object so that we can override private methods in methods we want to test, which contain private methods.
+
+## Details
+
 This is a very short example project, based on [Intro to PowerMock by Baeldung](http://www.baeldung.com/intro-to-powermock).
 
 Here, we try the example ourselves in order to verify that it is indeed possible to mock a private method!
@@ -14,7 +20,7 @@ Follow along in the [video tutorial](https://my.adaptiveu.io/full-learn/challeng
 
 ## Class/Package structure
 
-Many of you coming from the background of Google Plugin for Eclipse are used to seeing a different project structure than what just about every other build tool uses, including Gradle, Maven, and Cloud Tools for Eclipse plugin.  The structure is as follows:
+Many of you coming from the background of Google Plugin for Eclipse are used to seeing a different project structure than what just about every other build tool uses, including Gradle, Maven, and Cloud Tools for Eclipse plugin. The structure is as follows:
 
 **- src/main/java:**  This contains production code.  You will find a class called [CollaboratorForPartialMocking](https://github.com/FullLearning/PowerMockitoExample/blob/master/src/main/java/com/full/mockito/CollaboratorForPartialMocking.java), which contains some simple methods that return strings.  Two of the methods return a concatenation of a call to private methods.
 
