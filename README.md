@@ -6,6 +6,12 @@ Here, we try the example ourselves in order to verify that it is indeed possible
 
 While it is impossible to extend or override a private method, there is a workaround using the reflection API.  PowerMock uses the reflection API in order to accomplish this.
 
+
+## Video
+
+Follow along in the [video tutorial](https://my.adaptiveu.io/full-learn/challenges/ch/how-to-unit-test-legacy-code-with-powermock).
+
+
 ## Class/Package structure
 
 Many of you coming from the background of Google Plugin for Eclipse are used to seeing a different project structure than what just about every other build tool uses, including Gradle, Maven, and Cloud Tools for Eclipse plugin.  The structure is as follows:
