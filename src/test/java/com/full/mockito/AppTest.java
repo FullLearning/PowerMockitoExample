@@ -2,6 +2,10 @@ package com.full.mockito;
 
 import static org.powermock.api.mockito.PowerMockito.spy;
 import static org.powermock.api.mockito.PowerMockito.when;
+import static org.powermock.api.mockito.PowerMockito.whenNew;
+import static org.powermock.api.mockito.PowerMockito.mock;
+
+import java.io.IOException;
 
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -47,6 +51,9 @@ public class AppTest
      */
     public void testPrivateMethod() throws Exception
     {
+    	//if(true) return;
+    	
+    		System.out.println("\n\ntestPrivateMethod:: Running tests....");
     	
     		// We must instantiate the original, untouched object
 	    	CollaboratorForPartialMocking collaborator = new CollaboratorForPartialMocking();
@@ -105,6 +112,84 @@ public class AppTest
 	    	
 	    	
 	    	
+    }
+    
+    
+    /*
+     * Here we test the result of calling an object, which calls a method of another object instantiated within that
+     * method. In order to mock the method of the class created inside, we must first spy and mock an instance of the 
+     * "ClassReferencedFromOuterClass".  
+     * 
+     * Next, we must use "whenNew" to tell the system to use the innerMock whenever an instance of 
+     * ClassReferencedFromOuterClass is created.
+     * 
+     * Finally, we invoke any methods on the wrapper class
+     */
+    public void testMockObjectCalledWithinAnotherClass() throws Exception {
+    	
+    		System.out.println("\n\ntestMockObjectCalledWithinAnotherClass:: Running tests....");
+    	
+    		// create a mock, using spy.
+    	    ClassReferencedFromOuterClass classReferencedFromOuterClass = new ClassReferencedFromOuterClass();
+    	    ClassReferencedFromOuterClass innerMock = mock(ClassReferencedFromOuterClass.class);
+    	    
+    	    // mock the "getData" method so it returns a dummy value when we pass parameter "one".
+    	    when(innerMock, "getData", org.mockito.Matchers.anyString()).thenReturn("JAMESWASHERE");
+    	    
+    	    // Now, when "new ClassReferencedFromOuterClass()" is called within any other class, we return the mock
+    	    whenNew(ClassReferencedFromOuterClass.class).withNoArguments().thenReturn(innerMock);
+    	    
+    	    // Test the code by calling "run" method on the OuterClass.
+    	    OuterClass outerClass = new OuterClass();  
+    	    String result = outerClass.run("one");
+    	    
+    	    // Output should be "JAMESWASHERE", which is the dummy value.
+    	    System.out.println("testMockObjectCalledWithinAnotherClass:: " + result);
+    	    
+    	    assertEquals("JAMESWASHERE", result);
+    	    
+    	 // With mocking, functionality not mocked is null.
+    	    String otherData = innerMock.someOtherMethod();
+    	    System.out.println("Mock:: otherData = " + otherData);
+    }
+    
+    
+    /*
+     * Here we test the result of calling an object, which calls a method of another object instantiated within that
+     * method. In order to mock the method of the class created inside, we must first spy and mock an instance of the 
+     * "ClassReferencedFromOuterClass".  
+     * 
+     * Next, we must use "whenNew" to tell the system to use the innerMock whenever an instance of 
+     * ClassReferencedFromOuterClass is created.
+     * 
+     * Finally, we invoke any methods on the wrapper class
+     */
+    public void testSpyObjectCalledWithinAnotherClass() throws Exception {
+    	
+    		System.out.println("\n\ntestSpyObjectCalledWithinAnotherClass:: Running tests....");
+    	
+    		// create a mock, using spy.
+    	    ClassReferencedFromOuterClass classReferencedFromOuterClass = new ClassReferencedFromOuterClass();
+    	    ClassReferencedFromOuterClass innerSpy = spy(classReferencedFromOuterClass);
+    	    
+    	    // mock the "getData" method so it returns a dummy value when we pass parameter "one".
+    	    when(innerSpy, "getData", org.mockito.Matchers.anyString()).thenReturn("JAMESWASHERE");
+    	    
+    	    // Now, when "new ClassReferencedFromOuterClass()" is called within any other class, we return the mock
+    	    whenNew(ClassReferencedFromOuterClass.class).withNoArguments().thenReturn(innerSpy);
+    	    
+    	    // Test the code by calling "run" method on the OuterClass.
+    	    OuterClass outerClass = new OuterClass();  
+    	    String result = outerClass.run("one");
+    	    
+    	    // Output should be "JAMESWASHERE", which is the dummy value.
+    	    System.out.println("testMockObjectCalledWithinAnotherClass:: " + result);
+    	    
+    	    assertEquals("JAMESWASHERE", result);
+    	    
+    	    // With spying, functionality not mocked still exists
+    	    String otherData = innerSpy.someOtherMethod();
+    	    System.out.println("Spy:: otherData = " + otherData);
     }
     
     
