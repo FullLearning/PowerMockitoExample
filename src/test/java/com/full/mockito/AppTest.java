@@ -61,14 +61,17 @@ public class AppTest
 	    	 * Here we replace the privateMethod in the mock object with a different 
 	    	 * String return value.
 	    	 */
-	    	when(mock, "privateMethod").thenReturn("I am a private mock method."); 
+	    	when(mock, "privateMethod", "hello").thenReturn("I am a private mock method.");
+	    	when(mock, "privateMethod", "hello2").thenReturn("I am the second call to a private mock method.");
 	   
 	    	/* 
 	    	 * Here we call the PUBLIC method that depends on the private method. The 
 	    	 * original logic is in the public method, except the private method it
 	    	 * is calling is replaced with the return value "I am a private mock method."
 	    	 */ 
-	    	String returnValue = mock.privateMethodCaller();
+	    	String input = "hello";
+	    	String returnValue = mock.privateMethodCaller(input);
+	    	String returnValue2 = mock.privateMethodCaller("hello2");
 	    	
 	    	
 	    	/*
@@ -79,8 +82,9 @@ public class AppTest
 	    	 * private method.
 	    	 */
 	    	System.out.println("Calling \"privateMethodCaller\" which contains the mocked private method. Note differences:\n");
-	    	System.out.println("- Original object... collaborator.privateMethodCaller() -> " + collaborator.privateMethodCaller());
-	    	System.out.println("- Mocked object..... mock.privateMethodCaller() -> " + mock.privateMethodCaller() + "\n");
+	    	System.out.println("- Original object... collaborator.privateMethodCaller() -> " + collaborator.privateMethodCaller(input));
+	    	System.out.println("- Mocked object..... mock.privateMethodCaller() -> " + mock.privateMethodCaller(input) + "\n");
+	    	System.out.println("- Mocked object..... mock.privateMethodCaller() -> " + mock.privateMethodCaller("dsfdsafdsafsa") + "\n");
 	    	
 	    	
 	    	/*
@@ -97,6 +101,8 @@ public class AppTest
 	    	
 	    	// Here we validate that expected equals actual. 
 	    	assertEquals("I am a private mock method. Welcome to the Java world.", returnValue);
+	    	assertEquals("I am the second call to a private mock method. Welcome to the Java world.", returnValue2);
+	    	
 	    	
 	    	
     }

@@ -9,12 +9,12 @@ public class CollaboratorForPartialMocking {
         return "Hello Baeldung!";
     }
  
-    private String privateMethod() {
+    private String privateMethod(String test) {
         return "Hello Baeldung!";
     }
  
-    public String privateMethodCaller() {
-        return privateMethod() + " Welcome to the Java world.";
+    public String privateMethodCaller(String test) {
+        return privateMethod(test) + " Welcome to the Java world.";
     }
     
     public String thisIsNotMocked() {
