@@ -4,6 +4,7 @@ import static org.powermock.api.mockito.PowerMockito.spy;
 import static org.powermock.api.mockito.PowerMockito.when;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
 import static org.powermock.api.mockito.PowerMockito.mock;
+import static org.powermock.api.mockito.PowerMockito.doReturn;
 
 import java.io.IOException;
 
@@ -172,8 +173,18 @@ public class AppTest
     	    ClassReferencedFromOuterClass classReferencedFromOuterClass = new ClassReferencedFromOuterClass();
     	    ClassReferencedFromOuterClass innerSpy = spy(classReferencedFromOuterClass);
     	    
-    	    // mock the "getData" method so it returns a dummy value when we pass parameter "one".
-    	    when(innerSpy, "getData", org.mockito.Matchers.anyString()).thenReturn("JAMESWASHERE");
+    	    /*
+    	     * mock the "getData" method so it returns a dummy value when we pass parameter "one".
+    	     */
+    	    System.out.println("BEFORE");
+    	    
+    	    // This will not work. See https://github.com/powermock/powermock/issues/912#issuecomment-399332093
+    	    //when(innerSpy, "getData", org.mockito.Matchers.anyString()).thenReturn("JAMESWASHERE");
+    	    
+    	    // this will mock the method without first calling it, which is what we want.
+    	    doReturn("JAMESWASHERE").when(innerSpy).getData(org.mockito.Matchers.anyString());
+    	    System.out.println("AFTER :: " + innerSpy.getData("ASdfdsadfas"));
+    	    
     	    
     	    // Now, when "new ClassReferencedFromOuterClass()" is called within any other class, we return the mock
     	    whenNew(ClassReferencedFromOuterClass.class).withNoArguments().thenReturn(innerSpy);
