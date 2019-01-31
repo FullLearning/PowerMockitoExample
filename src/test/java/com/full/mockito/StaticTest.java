@@ -51,7 +51,8 @@ public class StaticTest
     		
     		//PowerMockito.mockStatic(StaticClass.class);
     		System.out.println("About to **set up mock** test code...");
-    		when(StaticClass.class, "getStaticData", "test").thenReturn("This is a static test.");
+    		//when(StaticClass.class, "getStaticData", "test").thenReturn("This xis a static test.");
+    		doReturn("This is a static test.").when(StaticClass.class, "getStaticData", "test");
     		
     		//when(StaticClass.getStaticData("test")).thenReturn("This is a static test.");
     		//PowerMockito.when(StaticClass.getStaticData("test")).thenReturn("This is a static test.");
@@ -61,8 +62,8 @@ public class StaticTest
     		
     		assertEquals(expectedResult, actualResult);
     		
-    		System.out.println("\nCheck the default behavior exists for other input...");
-    		assertEquals("This is the REAL static response.", StaticClass.getStaticData("something"));
+    		//System.out.println("\nCheck the default behavior exists for other input...");
+    		//assertEquals("This is the REAL static response.", StaticClass.getStaticData("something"));
     }
 }
 
